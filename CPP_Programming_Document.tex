@@ -1,0 +1,46 @@
+\documentclass{article}
+%This is a document for helping to learn CPP
+\begin{document}
+
+\begin{center}
+8.1 Introduction to Pointers
+\end{center}
+
+
+In an executable program, every variable has three major items associated with it:\\
+1.)The value stored in the variable.\\
+2.)The number of bytes reserved for the variable.\\
+3.)Where in memory these bytes are located.\\
+
+The memory location of the first byte reserved for a variable is known as the 
+variable's address.
+
+Knowing the location of the first byte and how many bytes have been \\
+allocated to the variable allows the executable program to access the \\
+variable's contents.\\
+
+After a variable name is declared, programmers are usually concerned only with\\the name and the value assigned to it and pay little attention to where this\\
+value is stored.\\
+\\
+For example:\\
+\\
+Refer to Program 8.1\\
+\\
+#include<iostream>\\
+using namespace std;\\
+\\
+int main()\\
+{\\
+\\
+int num;\\
+\\
+num = 22;\\
+"cout<< "The value stored in num is " << num<< endl;"\\
+cout<< sizeof(num) << " bytes are used to store this value" << endl;\\
+\\
+return 0;\\
+}\\
+\\
+
+%End of Document
+\end{document}

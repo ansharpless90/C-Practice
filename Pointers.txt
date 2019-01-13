@@ -1,0 +1,216 @@
+8.1 Introduction to pointers
+______________________________________________________________________________
+In an executable program, every variable has three major items associated with
+it:
+1.)The value stored in the variable.
+2.)The number of bytes reserved for the variable.
+3.)Where in memory these bytes are located.
+
+The memory location of the first byte reserved for a variable is known as the
+variable's address.
+
+Knowing the location of the first byte and how many bytes have been allocated
+to the variable allows the executable program to access the variable's 
+contents.
+
+After a variable name is declared, prgrammers are usually concerned only with
+the name and value assigned to it and pay little attention to where this value
+is stored.
+
+For example:
+
+Refer to Program 8.1 
+
+This is the output displayed when 8.1 is run:
+The value stored in num is 22
+4 bytes are used to store this value
+
+C++ allows you to display the address corresponding to any variable.
+The address displayed corresponds to the address of the first byte set aside
+in the computer's memory for the variable.
+
+To determine a variable's address, the address operator,& (address of), 
+operator must be used.
+
+Refer to program 8.2
+
+This is the output of Program 8.2
+The value stored in num is 22
+The address of num = 0012FED4
+
+The adress output depends on both the computer used and what other programs
+or data files are in memory when the program runs.
+
+Storing addresses
+_________________
+You can store adresses in suitably declared variables.
+For example, the statement
+
+numAddr = &num;
+
+stores the address coresponding to the variable num in the variable numAddr.
+
+Similarly, the statements
+d = &m;
+tabPoint = &list;
+chrPoint = &ch;
+
+store addresses of the variables m, list, and ch in the variables d, tabPoint,
+and chrPoint.
+
+The variables numAddr, d, tabPoint, and chrPoint are formally called pointer 
+variables or pointers.
+Pointers are variables used to store addresses of other variables.
+
+Using Addresses
+_______________
+The * symbol, when followed by a pointer, means "the variable whose address
+is stored in."
+
+Therefore if numAddr is a pointer, *numAddr means the variable whose address
+is stored in numAddr.
+
+A pointer variable y -> mmmm  <---The contents of
+                                  y are an address
+                                         |
+  The contents at  ---> qqqq        mmmm<-
+   address mmmm 
+     are qqqq
+
+
+Although *d means "the variable whose address is stored in d," it's 
+commonly shortened to the statement "the variable pointed to by d"
+
+When using a pointer variable, the value that's finally obtained is always
+found by first going to the pointer for an address.
+The address obtained in the pointer is then used to get the variable's 
+contents.
+Indirect addressing is used t describe this process.
+
+Pointers are useful because of their shared relationship with arrays and the
+capability of pointers to create and delete variable storage locations
+dynamically, as a program is running.
+
+Declaring Pointers
+__________________
+Like all variables, pointers must be declared before they can be used to
+store an address.
+When you declare a pointer variable, C++ requires also specifying the type 
+of variable that's pointed to.
+
+For example, if the address in the pointer numAddr is the address of an 
+integer, this is the correct declaration for the pointer:
+
+int *numAddr;
+
+This declaration is read as "the variable pointed to by numAddr is an integer.
+
+Because all addresses appear the same, the compiler needs this additional 
+information to know how many storage locations to access when it uses
+the address stored in the pointer.
+
+Here are other examples of pointer declarations:
+
+char *inkey;
+int *numPt;
+double *nm1Ptr
+
+To understand pointer declarations, reading the backward is helpful, starting
+with the asterisk, *, and translating it as "the variable whose address is 
+stored in" or "the variable pointed to by." 
+Applying this method to pointer declarations, the declaration char *inkey;,
+for example, can be read as "the variable whose address is stored in inkey
+is a char" or "the variable pointed to by inkey is a char."
+Both these statements are often shortened to the simpler "inkey points to a 
+char."
+
+Program 8.3 puts this information together to construct a program using
+pointers. 
+
+Refer to Program 8.3
+
+The output of Program 8.3 is as follows:
+The address stored in numAddr is 0012FEC8
+The value pointed to by numAddr is 22
+
+The address now stored in numAddr is 0012FEBC
+The value now pointed to by numAddr is 158
+
+The declaration statement int *numAddr; declares numAddr to be a pointer used
+store the address of an integer variable.
+The statement numAddr = &miles; stores the address of the variable miles in
+the pointer numAddr.
+The first cout statement causes this address to be displayed.
+The second cout statement uses the indirection operator(*) to retrieve and
+display the value pointed to by numAddr, which is of course, the value
+stored in miles.
+Because numAddr has been declared as a pointer to an integer variable, you can
+use this pointer to store the address of any integer variable.
+The statement numAddr = &dist illustrates this use by storing the address of
+the variable dist in numAddr.
+The last two cout statements verify the change in numAddr's value and confirm
+that the new stored address points to the variable dist.
+As shown in Program 8.3, only addresses should be stored in pointers.
+It vertainly would have been much simpler if the pointer used in Program 8.3
+could have been declared as pointer numAddr;. 
+This declaration, however, conveys no information about the storage used by 
+the variable whose address is stored in numAddr.
+This information is essential when the pointer is used with the indirection
+operator, as in the second cout statement in program 8.3.
+For example, if an integer's adress is stored in numAddr, typically only 4
+bytes of storage are retrieved when the address is used.
+If a character's address is stored in numAddr, only 1 byte of storage is 
+retrieved, and a double typically requires retrieving 8 bytes of storage.
+The declaration of a pointer must, therefore, include the data type of the
+variable being pointed to.
+
+References and Pointers
+_______________________
+Essentially a reference is named constant for an address; therefore, the 
+address named as a reference can't be altered after the address has been
+assigned.
+Clearly, for a reference parameter, a new reference is created and assigned
+an address each time the function is called.
+The address in a pointer, used as a variable or function parameter, can be
+changed after its initial assignment.
+
+In passing an address to a function, beginning programmers tend to prefer
+using references.
+The reason is the simpler notation for reference parameters, which eliminates
+the address operator (&) and indirection operator (*) required for pointers.
+Technicaly, references are said to be automatically dereferenced or implicitly
+dereferenced.
+In contrast, pointers must be explicitly dereferenced by using the indirection
+operator.
+In other situations, such as dynamically allocating new sections of memory for
+additional variables as a program is running and as an alternative to
+accessing array elements, pointers are required.
+
+Although references are used almost exclusively as function parameters and
+return types, they can also be declared as variables.
+For completeness, this use of references is explained in this section.
+After a variable has been declared, it can be given additional name by using
+a reference declaration, which has the form:
+
+dataType& newName = existingName;
+
+For example, the reference declaration
+
+duble& sum = total;
+
+equates the name sum to the name total.
+Both now refer to the same variable.
+
+After establishing another name for a variable by using a reference 
+declaration, the new name, reffered to as an alias, can be used in place of 
+the original name.
+For example, take a look at Program 8.4.
+
+Refer to Prgram 8.4
+
+The following output is produced by Program 8.4:
+
+sum = 20.5
+total = 18.6
+
+Because 
